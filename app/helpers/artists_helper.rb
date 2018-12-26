@@ -3,8 +3,8 @@ module ArtistsHelper
     song.artist.nil? ? link_to("Add Artist", edit_song_path(song)) : link_to(song.artist_name, artist_path(song.artist))
   end
 
-  def artist_select(song)
-    if song.artist.nil?
+  def artist_select(song,nested)
+    if !nested
       select_tag "song[artist_id]", options_from_collection_for_select(Artist.all, :id, :name)
     else
       hidden_field_tag "song[artist_id]", song.artist_id
